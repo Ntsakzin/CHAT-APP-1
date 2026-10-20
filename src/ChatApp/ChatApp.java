@@ -49,6 +49,105 @@ public class ChatApp {
         boolean loginResult = user.loginUser(loginUsername, loginPassword);
         System.out.println(user.returnLoginStatus(loginResult));
         
+        
+        if (loginResult){
+            
+            int option;
+            do{
+                System.out.println("Welcome to QuickChat");
+                System.out.println("1.Send Messages");
+                System.out.println("2.Show recently sent messages(Coming Soon)");
+                System.out.println("3.Quit");
+                
+                option = input.nextInt();
+                input.nextLine();
+                
+                switch (option){
+                    case 1: System.out.println("How many messages would you like to send?");
+                    
+                    int numMessages =input.nextInt();
+                    input.nextLine();
+                    
+                    for (int i = 1; i<= numMessages; i++){
+                        System.out.println("\nMessage" + i);
+                        System.out.println("Enter recipient number");
+                        String recipient = input.nextLine();
+                        
+                        while(!recipient.matches("^\\+27\\d{9}$")){
+                            System.out.println("Cell phone number incorrectly formatted");
+                            System.out.println("Enter recipient number again");
+                            recipient = input.nextLine();
+                        }
+                        
+                        System.out.println("Enter message");
+                        String messageText = input.nextLine();
+                        
+                        while(messageText.length() >250){
+                            
+                            System.out.println("Please enter a message of less than 250 characters.");
+                            messageText = input.nextLine();
+                        }
+                        
+                        Messaging msg = new Messaging(recipient,messageText,i);
+                        
+                        System.out.println("\nSelect an option");
+                        System.out.println("1.Send Message");
+                        System.out.println("2.Discard Message");
+                        System.out.println("3.Store Message to send later");
+                        
+                        int sendOption = input.nextInt();
+                        input.nextLine();
+                        
+                        System.out.println(msg.SentMessage(sendOption));
+                        
+                        if (sendOption ==1){
+                            
+                            System.out.println(msg.printMessages());
+                        }
+                        
+                        else if (sendOption ==2){
+                            
+                            System.out.println("Press 0 to delete the message");
+                            
+                            int delete = input.nextInt();
+                            input.nextLine();
+                            
+                            if (delete==0){
+                                
+                                System.out.println("Message discarded");
+                            }
+                        }
+                        
+                        else if (sendOption==3){
+                            
+                            System.out.println("Message successfully stored");
+                        }
+                        
+                        System.out.println("\nTotal Messages sent:" + Messaging.returnTotalMessages());
+                        
+                        break;
+                        
+                        
+                        
+                    }
+                    case 2:
+                        System.out.println("Coming soon.");
+                        
+                        break;
+                        
+                        case 3:
+                        System.out.println("Goodbye.");
+                        
+                        break;
+                        
+                        default:
+                        System.out.println("invalid option");
+                }
+                
+            }while(option !=3);
+        }
+        
+        
         input.close();
     }
     
