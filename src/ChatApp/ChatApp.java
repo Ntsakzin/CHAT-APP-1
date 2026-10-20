@@ -62,8 +62,8 @@ public class ChatApp {
                 option = input.nextInt();
                 input.nextLine();
                 
-                switch (option){
-                    case 1: System.out.println("How many messages would you like to send?");
+                if (option ==1){
+                    System.out.println("How many messages would you like to send?");
                     
                     int numMessages =input.nextInt();
                     input.nextLine();
@@ -78,6 +78,7 @@ public class ChatApp {
                             System.out.println("Enter recipient number again");
                             recipient = input.nextLine();
                         }
+                        
                         
                         System.out.println("Enter message");
                         String messageText = input.nextLine();
@@ -125,24 +126,21 @@ public class ChatApp {
                         
                         System.out.println("\nTotal Messages sent:" + Messaging.returnTotalMessages());
                         
-                        break;
+                        
                         
                         
                         
                     }
-                    case 2:
+                    
+                       
+                }
+                else if (option == 2){
                         System.out.println("Coming soon.");
                         
-                        break;
-                        
-                        case 3:
+                        }
+                else if (option == 3){
                         System.out.println("Goodbye.");
-                        
-                        break;
-                        
-                        default:
-                        System.out.println("invalid option");
-                }
+                            }
                 
             }while(option !=3);
         }
